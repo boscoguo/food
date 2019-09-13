@@ -1,52 +1,48 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import * as action from '../../redux/menus/actions'
-import { Card, Typography } from 'antd';
 import Header from '../../components/header'
-
-const { Meta } = Card;
-const { Text } = Typography;
+import MenuItem from '../../components/menuitem'
+import { Wrapper, MenuWrapper } from './styles'
 
 class Content extends Component {
+    constructor (props) {
+        super(props)
+        this.state = {
+            menus: props.menus.list
+        }
+    }
+    componentDidUpdate(prevProps, prevState) {
+        // only update list if the data has changed
+        if (prevProps.menus !== this.props.menus) {
+          this.setState({
+              menus: this.props.menus.list
+          })
+        }
+    }
     componentDidMount () {
         const { handleFetch } = this.props
         handleFetch()
     }
-    render () {
+    handleSearch = (keyword) => {
         const { list } = this.props.menus
-        console.log('props', list)
-        if (!list) return null
+        const menus = list.filter(menu => menu.name.includes(keyword))
+        this.setState({
+            menus,
+        })
+    }
+    render () {
+        const { menus } = this.state
+        if (!menus) return null
         return (
-                // <div>{this.props.test}</div>
-            <div style={{ display: "flex" }}>
-                <Header />
+            <Wrapper>
+                <Header search={this.handleSearch}/>
+                <MenuWrapper>
                 {
-                    list.map((item, index) => {
-                        return (
-                            <div key={index}>
-                                <div style={{ position: "relative", marginLeft: "50px" }}>
-                                    <img alt="example" style={{ width: 240, height: 300 }} src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />
-                                    <div style={{ width: "100%", height: "40%", background: "pink", position: "absolute", bottom: 0 }}>
-                                        <Text style={{ fontWeight: "bold", display: "block",lineHeight:2 }}>Description:</Text>
-                                        <Text style={{ display: "block",lineHeight:1 }}>{item.description}</Text>
-                                        <Text style={{ fontWeight: "bold", display: "block",lineHeight:2 }}>Type:</Text>
-                                        <Text style={{ display: "block",lineHeight:1 }}>{item.type}</Text>
-                                    </div>
-                                    {/* <Icon
-                                        type="close-circle"
-                                        style={{ position: "absolute", top: 10, right: 10, color: "white" }}
-                                        onClick = {this.props.handleDelete}
-                                    /> */}
-                                </div>
-                                <Meta style={{ textAlign: "center" }} title={item.name} />
-                            </div>
-                        )
-
-                    })
+                    menus.map((item, index) => <MenuItem key={index} item={item} />)
                 }
-            </div>
-
-
+                </MenuWrapper>
+            </Wrapper>
         )
     }
 }
@@ -63,9 +59,8 @@ const mapDispatchToProps = (dispatch) => {
         },
         handleDelete (index) {
             // console.log("delete")
-            dispatch(action.menusDelete(index))
-            
-        }
+            dispatch(action.menusDelete(index)) 
+        },
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Content)

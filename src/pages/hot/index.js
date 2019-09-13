@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-// import * as actionCreators from'./store/actionCreators'
-import { Card } from 'antd';
-import { Typography } from 'antd';
-// import { stat } from 'fs';
+import { Card, Typography } from 'antd'
+
 const { Meta } = Card;
 const { Text } = Typography;
 
