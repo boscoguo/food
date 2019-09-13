@@ -1,5 +1,7 @@
 export const MENUS_CREATE = 'MENUS_ADD'
 export const MENUS_FETCH = 'MENUS_FETCH'
+export const MENUS_FETCH_SUCCESS = 'MENUS_FETCH_SUCCESS'
+export const MENUS_FETCH_FAILED = 'MENUS_FETCH_FAILED'
 export const MENUS_DELETE = 'MENUS_DELETE'
 export const MENUS_SEARCH = 'MENUS_SEARCH'
 
@@ -10,6 +12,16 @@ export const menusCreate = (menu) => ({
 
 export const menusFetch = () => ({
     type: MENUS_FETCH
+})
+
+export const menusFetchSuccess = (menus) => ({
+    type: MENUS_FETCH_SUCCESS,
+    menus
+})
+
+export const menuFetchFailed = (error) => ({
+    type: MENUS_FETCH_FAILED,
+    error
 })
 
 export const menusDelete = (id) => ({

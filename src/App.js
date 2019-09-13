@@ -7,7 +7,7 @@ import { BrowserRouter as Router } from 'react-router-dom'
 // import Header from './common/header'
 import { GlobalStyle } from './style'
 import store from './redux/store'
-import SiderItem from './pages/sider'
+import SiderBar from './components/sider'
 import AppRouter from './AppRouter'
 import 'antd/dist/antd.css'
 
@@ -24,7 +24,7 @@ class App extends Component {
           
           {/* left side */}
           <Sider style={{ background: "lightgreen" }}>
-            <SiderItem />
+            <SiderBar />
           </Sider>
           <Layout style={{minHeight:"100vh"}}>
             <Content>

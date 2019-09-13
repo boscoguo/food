@@ -2,11 +2,10 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import * as action from '../../redux/menus/actions'
 import { Card, Typography } from 'antd';
-import Header from '../header'
+import Header from '../../components/header'
 
 const { Meta } = Card;
 const { Text } = Typography;
-
 
 class Content extends Component {
     componentDidMount () {
@@ -14,14 +13,15 @@ class Content extends Component {
         handleFetch()
     }
     render () {
-        const { list } = this.props
+        const { list } = this.props.menus
+        console.log('props', list)
         if (!list) return null
         return (
                 // <div>{this.props.test}</div>
             <div style={{ display: "flex" }}>
                 <Header />
                 {
-                    this.props.list.map((item, index) => {
+                    list.map((item, index) => {
                         return (
                             <div key={index}>
                                 <div style={{ position: "relative", marginLeft: "50px" }}>
@@ -53,7 +53,7 @@ class Content extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        list: state.menus.list
+        menus: state.menus.toJS()
     }
 }
 const mapDispatchToProps = (dispatch) => {
