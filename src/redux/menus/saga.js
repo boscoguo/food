@@ -6,7 +6,12 @@ export function* handleMenusFetch() {
     yield takeLatest(Actions.MENUS_FETCH, function*(action) {
         try {
             const menus = yield call(getMenus)
-            yield put(Actions.menusFetchSuccess(menus))
+            if (action.category) {
+                const list = menus.filter(menu => menu.type === action.category)
+                yield put(Actions.menusFetchSuccess(list))
+            } else {
+                yield put(Actions.menusFetchSuccess(menus))
+            }
         }catch(error) {
             yield put(Actions.menuFetchFailed(error))
         }

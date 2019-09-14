@@ -10,8 +10,9 @@ export const menusCreate = (menu) => ({
     menu
 })
 
-export const menusFetch = () => ({
-    type: MENUS_FETCH
+export const menusFetch = (category) => ({
+    type: MENUS_FETCH,
+    category,
 })
 
 export const menusFetchSuccess = (menus) => ({
