@@ -14,7 +14,8 @@ export default (state = defaultState, action) => {
             const list = state.list.push(action.menu)
             return state.set('list', list)
         case Actions.MENUS_DELETE:
-            return state.set('list', state.list.splice(action.id, 1))
+            const deleteList = state.get('list').filter(menu => menu.name !== action.item.name)
+            return state.set('list', deleteList)
         default:
             return state
     }

@@ -24,9 +24,9 @@ export const menuFetchFailed = (error) => ({
     error
 })
 
-export const menusDelete = (id) => ({
+export const menusDelete = (item) => ({
     type: MENUS_DELETE,
-    id
+    item
 })
 
 export const menusSearch = (keyword) => ({

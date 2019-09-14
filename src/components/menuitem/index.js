@@ -1,11 +1,19 @@
 import React, { Component } from 'react'
-import { Card, Typography } from 'antd'
+import { connect } from 'react-redux'
+import { Card, Typography, Icon } from 'antd'
+
+import * as action from '../../redux/menus/actions'
+
 import { Wrapper } from './styles'
 
 const { Meta } = Card
 const { Text } = Typography
 
-export default class MenuItem extends Component {
+class MenuItem extends Component {
+    onDelete = () => {
+        const { item, handleDelete } = this.props
+        handleDelete(item)
+    }
     render() {
         const { item } = this.props
         return (
@@ -18,14 +26,30 @@ export default class MenuItem extends Component {
                         <Text style={{ fontWeight: "bold", display: "block", lineHeight: 2 }}>Type:</Text>
                         <Text style={{ display: "block", lineHeight: 1 }}>{item.type}</Text>
                     </div>
-                    {/* <Icon
-                                        type="close-circle"
-                                        style={{ position: "absolute", top: 10, right: 10, color: "white" }}
-                                        onClick = {this.props.handleDelete}
-                                    /> */}
+                    <Icon
+                        type="close-circle"
+                        style={{ position: "absolute", top: 10, right: 10, color: "white" }}
+                        onClick = {this.onDelete}
+                    />
                 </div>
                 <Meta style={{ textAlign: "center" }} title={item.name} />
             </Wrapper>
         )
     }
 }
+
+const mapStateToProps = (state) => {
+    return {
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        handleDelete (item) {
+            // console.log("delete")
+            dispatch(action.menusDelete(item)) 
+        },
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MenuItem)
