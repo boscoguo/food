@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import * as action from '../../redux/menus/actions'
-import Header from '../../components/header'
 import MenuItem from '../../components/menuitem'
-import CreateForm from '../../components/createForm'
 import { Wrapper, MenuWrapper } from './styles'
 
 class Content extends Component {
