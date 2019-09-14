@@ -11,8 +11,9 @@ export default (state = defaultState, action) => {
             const newState = state.set('list', action.menus)
             return newState
         case Actions.MENUS_CREATE:
-            const list = state.list.push(action.menu)
-            return state.set('list', list)
+            const list = state.get('list')
+            list.push(action.menu)
+            return state.set('list', [...list])
         case Actions.MENUS_DELETE:
             const deleteList = state.get('list').filter(menu => menu.name !== action.item.name)
             return state.set('list', deleteList)

@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import { Button, Icon, Input, Card } from 'antd'
 
 import { Wrapper } from './styles'
@@ -10,6 +10,10 @@ class Header extends Component {
     handleSearch = (keyword) => {
         const { search } = this.props
         search(keyword)
+    }
+    handleCreate = () => {
+        const { handleCreateClick } = this.props
+        handleCreateClick()
     }
     render() {
         const { search } = this.props
@@ -24,7 +28,7 @@ class Header extends Component {
                     />
                 </div>
                 <div>
-                    <Button type="primary" onClick={this.props.showDrawer}>
+                    <Button type="primary" onClick={this.handleCreate}>
                         <Icon type="plus" /> New dishes
                         </Button>
                 </div>

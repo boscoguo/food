@@ -3,20 +3,22 @@ import { connect } from 'react-redux'
 import * as action from '../../redux/menus/actions'
 import Header from '../../components/header'
 import MenuItem from '../../components/menuitem'
+import CreateForm from '../../components/createForm'
 import { Wrapper, MenuWrapper } from './styles'
 
 class Content extends Component {
     constructor (props) {
         super(props)
         this.state = {
-            menus: props.menus.list
+            menus: props.menus.list || [],
+            createFormVisible: false,
         }
     }
     componentDidUpdate(prevProps, prevState) {
         // only update list if the data has changed
-        if (prevProps.menus !== this.props.menus) {
+        if (prevProps.menus !== this.props.menus || prevProps.menus.length !== this.props.menus.length) {
           this.setState({
-              menus: this.props.menus.list
+              menus: this.props.menus
           })
         }
     }
@@ -25,23 +27,57 @@ class Content extends Component {
         handleFetch()
     }
     handleSearch = (keyword) => {
-        const { list } = this.props.menus
-        const menus = list.filter(menu => menu.name.includes(keyword))
+        const { menus } = this.props
+        if (!keyword) {
+            this.setState({
+                menus,
+            })
+            return
+        }
+        const newMenus = menus.filter(menu => menu.name.includes(keyword))
         this.setState({
-            menus,
+            menus: newMenus,
+        })
+    }
+    handleCreate = () => {
+        const form = this.form
+        form.validateFields((err, values) => {
+            if (err) {
+                return
+            }
+            const menu = form.getFieldsValue()
+            console.log('menu', menu)
+            this.props.handleCreate(menu)
+            this.handleCancel()
+        })
+    }
+    handleCancel = () => {
+        this.setState({
+            createFormVisible: false,
+        })
+    }
+    handleCreateClick = () => {
+        this.setState({
+            createFormVisible: true,
         })
     }
     render () {
-        const { menus } = this.state
-        if (!menus) return null
+        console.log('menus', this.props.menus)
+        const { menus, createFormVisible } = this.state
         return (
             <Wrapper>
-                <Header search={this.handleSearch}/>
+                <Header search={this.handleSearch} handleCreateClick={this.handleCreateClick} />
                 <MenuWrapper>
                 {
                     menus.map((item, index) => <MenuItem key={index} item={item} />)
                 }
                 </MenuWrapper>
+                <CreateForm
+                    ref={form => this.form = form}
+                    visible={createFormVisible}
+                    onCreate={this.handleCreate}
+                    onCancel={this.handleCancel}
+                />
             </Wrapper>
         )
     }
@@ -49,7 +85,7 @@ class Content extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        menus: state.menus.toJS()
+        menus: state.menus.toJS().list
     }
 }
 const mapDispatchToProps = (dispatch) => {
@@ -61,6 +97,9 @@ const mapDispatchToProps = (dispatch) => {
             // console.log("delete")
             dispatch(action.menusDelete(index)) 
         },
+        handleCreate (menu) {
+            dispatch(action.menusCreate(menu))
+        }
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Content)
