@@ -6,16 +6,20 @@ export const Wrapper = styled.div`
     .menu {
         color: #F9FBE2;
     }
-`    
-    
+`
+
 export const TextWrapper = styled.div`
-    .text {
-        display: block;
-        color: #B3B9B7 ;
-    }
-    .active {
-        color:blue;
-        display:block;
+    .menu-type {
+        display: flex; 
+        flex-direction: column; 
+        .menu-type-item {
+            border:none; 
+            background: #00152A; 
+            font-weight: bold;
+        }
+        .menu-type-other {
+            color:white;
+        }
     }
 `
 

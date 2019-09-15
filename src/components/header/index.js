@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Icon, Input, Card } from 'antd'
+import { Button, Icon, Input } from 'antd'
 
 import { Wrapper } from './styles'
 

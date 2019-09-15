@@ -22,7 +22,7 @@ class App extends Component {
         <Layout style={{minHeight:"100%"}}>
           
           {/* left side */}
-          <Sider style={{ background: "#00152A" }}>
+          <Sider breakpoint="xs ms" collapsedWidth="0" style={{ background: "#00152A" }}>
             <SiderBar />
           </Sider>
           <Layout style={{minHeight:"100vh"}}>

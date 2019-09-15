@@ -20,6 +20,12 @@ export const Wrapper = styled.div`
             color:#B7EFF6;
             margin-bottom:15px;
         }
+        .menu-item-icon {
+            position: absolute; 
+            top: 10px; 
+            right: 10px; 
+            color: white;
+        }
    } 
    .menu-meta {
       text-align: center;

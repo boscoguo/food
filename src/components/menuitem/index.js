@@ -47,11 +47,12 @@ class MenuItem extends Component {
                     </TextWrapper>
                     <Icon
                         type="close-circle"
-                        style={{ position: "absolute", top: 10, right: 10, color: "white" }}
+                        className = "menu-item-icon"
                         onClick = {this.onDelete}
                     />
                 </div>
-                <Meta className = "menu-meta" title={item.name} />
+                {/* <Meta className = "menu-meta" title={item.name} /> */}
+                <p style={{textAlign:"center", color:"#9C9FA3"}}>{item.name}</p>
             </Wrapper>
         )
     }

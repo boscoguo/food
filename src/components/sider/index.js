@@ -1,14 +1,23 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
 import { Typography } from 'antd'
 import { Link } from 'react-router-dom'
 import { Wrapper, TextWrapper } from './styles.js'
+import { Radio } from 'antd'
 const { Title } = Typography;
 const { Text } = Typography;
 
 
 class SiderBar extends Component {
-    
+    constructor(props) {
+        super(props)
+        this.state = {
+            size: 'large',
+        }
+    }
+    handleSizeChange = e => {
+        this.setState({ size: e.target.value });
+    };
+
     render() {
         return (
             <div>
@@ -16,36 +25,25 @@ class SiderBar extends Component {
                     <Title className="menu" level={2}>Menu</Title>
                     <TextWrapper>
                         <Title className="menu" level={3} >Types</Title>
-                        <Link to='/all'>
-                            <Text
-                                strong
-                                className= "active text"
-                                onClick = {this.addClass}
-                            >All</Text>
-                        </ Link>
-                        <Link to='/cold'>
-                            <Text
-                                strong
-                                className="text"
-                                onClick = {this.addClass}
-                            >Cold</Text>
-                        </Link>
-                        <Link to="/hot">
-                            <Text
-                                strong
-                                className="text"
-                            >Hot</Text>
-                        </Link>
-                        <Link to="/seafood">
-                            <Text
-                                strong
-                                className="text"
-                            >Sea food</Text>
-                        </Link>
+
+                        <Radio.Group className="menu-type" value={this.state.size} onChange={this.handleSizeChange}>
+                            <Link to='/all'>
+                                <Radio.Button className ="menu-type-item" value="large">all</Radio.Button>
+                            </Link>
+                            <Link  to='/cold'>
+                                <Radio.Button className ="menu-type-item menu-type-other " value="default">cold</Radio.Button>
+                            </Link>
+                            <Link to='/hot'>
+                                <Radio.Button className ="menu-type-item menu-type-other" value="small">hot</Radio.Button>
+                            </Link>
+                            <Link to='/seafood'>
+                                <Radio.Button className ="menu-type-item menu-type-other" value="good">seafood</Radio.Button>
+                            </Link>
+                        </Radio.Group>
                     </TextWrapper>
                 </Wrapper>
 
-            </div>
+            </div >
         )
     }
 }
