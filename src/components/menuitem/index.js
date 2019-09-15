@@ -4,35 +4,54 @@ import { Card, Typography, Icon } from 'antd'
 
 import * as action from '../../redux/menus/actions'
 
-import { Wrapper } from './styles'
+import { Wrapper,TextWrapper } from './styles'
 
 const { Meta } = Card
 const { Text } = Typography
 
 class MenuItem extends Component {
+    constructor (props) {
+        super(props)
+        this.state = {
+            show: true
+        }
+     }
     onDelete = () => {
         const { item, handleDelete } = this.props
         handleDelete(item)
+    }
+    showDetail = () => {
+        this.setState({
+            show: false
+        })
+    }
+    removeDetail = () => {
+        this.setState({
+            show: true
+        })
     }
     render() {
         const { item } = this.props
         return (
             <Wrapper>
-                <div className="menu-item">
-                    <img alt="example" style={{ width: 240, height: 300 }} src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />
-                    <div style={{ width: "100%", height: "40%", background: "pink", position: "absolute", bottom: 0 }}>
-                        <Text style={{ fontWeight: "bold", display: "block", lineHeight: 2 }}>Description:</Text>
-                        <Text style={{ display: "block", lineHeight: 1 }}>{item.description}</Text>
-                        <Text style={{ fontWeight: "bold", display: "block", lineHeight: 2 }}>Type:</Text>
-                        <Text style={{ display: "block", lineHeight: 1 }}>{item.type}</Text>
-                    </div>
+                <div className="menu-item" 
+                     onMouseEnter = {this.showDetail} 
+                     onMouseLeave = {this.removeDetail}
+                >
+                    <img alt="example" className= "menu-item-img" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />
+                    <TextWrapper className= {this.state.show ? "" : "show"} >
+                        <Text className="menu-item-textTitle">Description:</Text>
+                        <Text className="menu-item-textWord">{item.description}</Text>
+                        <Text className="menu-item-textTitle">Type:</Text>
+                        <Text className="menu-item-textWord">{item.type}</Text>
+                    </TextWrapper>
                     <Icon
                         type="close-circle"
                         style={{ position: "absolute", top: 10, right: 10, color: "white" }}
                         onClick = {this.onDelete}
                     />
                 </div>
-                <Meta style={{ textAlign: "center" }} title={item.name} />
+                <Meta className = "menu-meta" title={item.name} />
             </Wrapper>
         )
     }

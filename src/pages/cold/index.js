@@ -7,3 +7,4 @@ export default class Content extends Component {
         return <Category category="cold" />
     }
 }
+ 

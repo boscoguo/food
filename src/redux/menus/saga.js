@@ -5,6 +5,7 @@ import { getMenus } from '../../services/menus'
 export function* handleMenusFetch() {
     yield takeLatest(Actions.MENUS_FETCH, function*(action) {
         try {
+            // fetch mock data 
             const menus = yield call(getMenus)
             if (action.category) {
                 const list = menus.filter(menu => menu.type === action.category)

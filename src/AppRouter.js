@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import {Switch, Route } from 'react-router-dom' 
 import Home from './pages/home'
 import All from './pages/content'
@@ -6,7 +6,7 @@ import ContentCold from './pages/cold'
 import ContentHot from './pages/hot'
 import ContentSeafood from './pages/seafood'
 
-export default class AppRouter extends React.Component {
+ class AppRouter extends Component {
     render () {
         return (
             <Switch>
@@ -19,3 +19,4 @@ export default class AppRouter extends React.Component {
         )
     }
 }
+export default AppRouter

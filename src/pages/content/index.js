@@ -56,6 +56,7 @@ class Content extends Component {
             createFormVisible: false,
         })
     }
+    // control the status of modal
     handleCreateClick = () => {
         this.setState({
             createFormVisible: true,

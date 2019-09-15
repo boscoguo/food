@@ -3,7 +3,6 @@ import { Button, Icon, Input, Card } from 'antd'
 
 import { Wrapper } from './styles'
 
-const { Meta } = Card;
 const { Search } = Input;
 
 class Header extends Component {
@@ -16,14 +15,14 @@ class Header extends Component {
         handleCreateClick()
     }
     render() {
-        const { search } = this.props
+        // const { search } = this.props
         return (
             <Wrapper>
                 <div>
                     <Search
                         placeholder={this.props.inputValue}
                         onSearch={this.handleSearch}
-                        style={{ width: 300 }}
+                        className = "search"
                         onFocus={this.props.handleInputValue}
                     />
                 </div>

@@ -4,6 +4,8 @@ export const MENUS_FETCH_SUCCESS = 'MENUS_FETCH_SUCCESS'
 export const MENUS_FETCH_FAILED = 'MENUS_FETCH_FAILED'
 export const MENUS_DELETE = 'MENUS_DELETE'
 export const MENUS_SEARCH = 'MENUS_SEARCH'
+export const CHANGE_ACTIVED_COLOR = 'CHANGE_ACTIVED_COLOR'
+
 
 export const menusCreate = (menu) => ({
     type: MENUS_CREATE,
@@ -34,3 +36,5 @@ export const menusSearch = (keyword) => ({
     type: MENUS_SEARCH,
     keyword
 })
+
+
